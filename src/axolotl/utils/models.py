@@ -669,6 +669,7 @@ def load_model(
         raise err
 
     if isinstance(model, (PeftModel, PeftModelForCausalLM)) and not qlora_fsdp:
+        print("-" * 30 + "merge and unload" + "-" * 30)
         model = model.merge_and_unload()
 
     embeddings_len = (
