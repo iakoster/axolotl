@@ -668,6 +668,7 @@ def load_model(
         LOG.exception(err)
         raise err
 
+    print("-" * 27 + "before merge and unload" + "-" * 26)
     if isinstance(model, (PeftModel, PeftModelForCausalLM)) and not qlora_fsdp:
         print("-" * 30 + "merge and unload" + "-" * 30)
         model = model.merge_and_unload()
