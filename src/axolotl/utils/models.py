@@ -674,11 +674,8 @@ def load_model(
         raise err
 
     LOG.info("-" * 27 + "before merge and unload" + "-" * 26)
-    LOG.info(model)
-    LOG.info(type(model))
-    if isinstance(model, (PeftModel, PeftModelForCausalLM)) and not qlora_fsdp:
-        LOG.info("-" * 30 + "merge and unload" + "-" * 30)
-        model = model.merge_and_unload()
+    model = model.merge_and_unload()
+    LOG.info("-" * 30 + "merge and unload" + "-" * 30)
 
     embeddings_len = (
         math.ceil(len(tokenizer) / 32) * 32
